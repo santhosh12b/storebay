@@ -72,14 +72,14 @@ const helpNav = [
 const flatLinks = helpNav.flatMap(group => group.links);
 
 function generateSidebar(currentSlug) {
-  let html = `<aside class="doc-nav" aria-label="Help contents">\n    <a class="doc-home" href="https://storebay.in/docs/">Help</a>\n`;
+  let html = `<aside class="doc-nav" aria-label="Help contents">\n    <a class="doc-home" href="https://storebay-two.vercel.app/help/">Help</a>\n`;
   helpNav.forEach(group => {
     html += `          <div class="doc-group">${group.title}</div>\n`;
     group.links.forEach(link => {
       if (link.slug === currentSlug) {
-        html += `              <a href="https://storebay.in/docs/${link.slug}/" aria-current="page">${link.title}</a>\n`;
+        html += `              <a href="https://storebay-two.vercel.app/help/${link.slug}/" aria-current="page">${link.title}</a>\n`;
       } else {
-        html += `              <a href="https://storebay.in/docs/${link.slug}/">${link.title}</a>\n`;
+        html += `              <a href="https://storebay-two.vercel.app/help/${link.slug}/">${link.title}</a>\n`;
       }
     });
   });
@@ -93,14 +93,14 @@ function generateMoreNav(currentSlug) {
   
   if (currentIndex > 0) {
     const prev = flatLinks[currentIndex - 1];
-    html += `                  <a href="https://storebay.in/docs/${prev.slug}/"><span>Previous</span><b>${prev.title}</b></a>\n`;
+    html += `                  <a href="https://storebay-two.vercel.app/help/${prev.slug}/"><span>Previous</span><b>${prev.title}</b></a>\n`;
   } else {
     html += `        <span></span>`;
   }
   
   if (currentIndex < flatLinks.length - 1 && currentIndex !== -1) {
     const next = flatLinks[currentIndex + 1];
-    html += `                          <a class="next" href="https://storebay.in/docs/${next.slug}/"><span>Next</span><b>${next.title}</b></a>\n`;
+    html += `                          <a class="next" href="https://storebay-two.vercel.app/help/${next.slug}/"><span>Next</span><b>${next.title}</b></a>\n`;
   }
   
   html += `              </nav>`;
@@ -124,6 +124,9 @@ for (let key in data) {
   if (navRegex.test(html)) {
     html = html.replace(navRegex, generateMoreNav(key));
   }
+  
+  // Replace all other old docs links within the body
+  html = html.replace(/https:\/\/storebay\.in\/docs\//g, 'https://storebay-two.vercel.app/help/');
   
   data[key] = html;
 }
