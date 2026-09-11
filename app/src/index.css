@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-orange selection:text-white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-foreground m-0;
+  }
+  
+  p {
+    @apply m-0 mb-2.5;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #E6740D; /* brand orange */
+    border-radius: 4px;
+    border: 2px solid #f8f9fa; /* match subnav bg */
+  }
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #E6740D transparent;
+  }
+}
+
+@layer components {
+  /* Documentation Next/Prev Nav Buttons */
+  .doc-more {
+    @apply mt-16 flex flex-col sm:flex-row gap-4 w-full justify-between items-stretch;
+  }
+  
+  .doc-more > span:empty {
+    @apply hidden; /* Hide the empty placeholder span */
+  }
+
+  .prose .doc-more a {
+    @apply !no-underline !text-navy flex flex-col justify-center p-6 rounded-xl border border-surfaceBorder bg-white hover:border-orange hover:shadow-sm transition-all flex-1 min-w-0;
+  }
+
+  .prose .doc-more a span {
+    @apply text-sm font-medium text-ink-muted tracking-wider uppercase mb-1;
+  }
+
+  .prose .doc-more a b {
+    @apply text-xl font-bold;
+  }
+
+  .prose .doc-more a:not(.next) {
+    @apply items-start text-left;
+  }
+
+  .prose .doc-more a.next {
+    @apply items-end text-right;
+  }
+
+  /* Scraped Documentation Fixes */
+  .prose .doc-nav {
+    @apply hidden; /* Hide the injected duplicate sidebar */
+  }
+  
+  .prose .doc-shell {
+    @apply block w-full;
+  }
+  
+  .prose table {
+    @apply block w-full overflow-x-auto;
+  }
+}
